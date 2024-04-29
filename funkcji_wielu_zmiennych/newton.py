@@ -85,13 +85,13 @@ ext_rounded = np.round(ext, 8)
 print(f"Ekstremum w punkcie: {ext_rounded}, znalezione w {iterations} iteracjach.")
 
 # Wygenerowanie wykresu funkcji
-x = np.linspace(-10, 10, 400)
-y = np.linspace(-10, 10, 400)
+x = np.linspace(-1, 2, 400)
+y = np.linspace(-1, 2, 400)
 X, Y = np.meshgrid(x, y)
 Z = f(X, Y)
 
 plt.figure(figsize=(8, 6))
-plt.contour(X, Y, Z, levels=30)
+plt.contour(X, Y, Z, levels=20)
 plt.scatter(xs, ys, color='blue', s=5, label='Punkty z każdej iteracji')
 plt.scatter(ext[0], ext[1], color='red', label='Ekstremum')
 plt.xlabel('x')

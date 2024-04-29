@@ -43,7 +43,7 @@ def hessian(x, y):
 
 
 # Implementacja metody Najszybszego spadku
-def newton_method(x0, y0, epsilon):
+def najszybszy_spadek(x0, y0, epsilon):
     iter = 0
     xyk = np.array([x0, y0])
     xs = [xyk[0]]
@@ -71,21 +71,21 @@ def newton_method(x0, y0, epsilon):
     return xyk, iter, xs, ys
 
 
-# Wywołanie metody Newtona
-ext, iterations, xs, ys = newton_method(x0, y0, epsilon)
+# Wywołanie metody Najszybszego spadku
+ext, iterations, xs, ys = najszybszy_spadek(x0, y0, epsilon)
 
 ext_rounded = np.round(ext, 8)
 
 print(f"Ekstremum w punkcie: {ext_rounded}, znalezione w {iterations} iteracjach.")
 
 # Wygenerowanie wykresu funkcji
-x = np.linspace(-5, 5, 400)
-y = np.linspace(-5, 5, 400)
+x = np.linspace(-1, 2, 400)
+y = np.linspace(-1, 2, 400)
 X, Y = np.meshgrid(x, y)
 Z = f(X, Y)
 
 plt.figure(figsize=(8, 6))
-plt.contour(X, Y, Z, levels=30)
+plt.contour(X, Y, Z, levels=20)
 plt.scatter(xs, ys, color='blue', s=5, label='Punkty z każdej iteracji')
 plt.scatter(ext[0], ext[1], color='red', label='Ekstremum')
 plt.xlabel('x')
