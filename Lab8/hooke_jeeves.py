@@ -6,10 +6,11 @@ f = lambda x_1, x_2: x_2 * x_2 * x_2 + 3 * x_1 * x_1 - x_1 * x_2 - 2 * x_1 + 5
 x0 = [1, 1]
 e = 0.5
 beta = 0.5
-epsilon = 0.01
+epsilon = 0.00001
 n = 2
 
 def hooke_jeeves(x0, n, e, beta, epsilon, max_iter=100):
+    iter = 0
     x_base = np.array(x0)
     x_new = x_base.copy()
     xi = np.eye(n)
@@ -31,6 +32,8 @@ def hooke_jeeves(x0, n, e, beta, epsilon, max_iter=100):
                 break
 
         if improved:
+            if iter == 15: break
+            iter += 1
             # Pattern move
             x_step = 2 * x_new - x_base
             if f(*x_step) < f(*x_base):
@@ -46,22 +49,22 @@ def hooke_jeeves(x0, n, e, beta, epsilon, max_iter=100):
         if e < epsilon:
             break
 
-    return x_new, path
+    return x_new, path, iter
 
-opt_point, path = hooke_jeeves(x0, n, e, beta, epsilon)
+opt_point, path, iterations = hooke_jeeves(x0, n, e, beta, epsilon)
 path = np.array(path)
 
-print("Optymalny punkt:", opt_point)
+print(f"Optymalny punkt:, {opt_point}, znalezione w {iterations} iteracjach.")
 print("Wartość funkcji w punkcie optymalnym:", f(*opt_point))
 
 # Wizualizacja
-x = np.linspace(0.2, 1.1, 400)
-y = np.linspace(-0.2, 1.4, 400)
+x = np.linspace(0, 1.5, 400)
+y = np.linspace(-0.2, 1.5, 400)
 X, Y = np.meshgrid(x, y)
 Z = f(X, Y)
 
 plt.figure(figsize=(8, 6))
-plt.contour(X, Y, Z, levels=10)
+plt.contour(X, Y, Z, levels=20)
 
 # Gradually change colors along the path
 colors = cm.viridis(np.linspace(0, 1.5, len(path)))

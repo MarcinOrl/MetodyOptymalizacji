@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 # Parametry początkowe
 x0 = 1.0059
 y0 = 1.78978
-epsilon = 0.0001
+epsilon = 0.00001
 h = 0.00001
 
 
@@ -67,8 +67,8 @@ ext_rounded = np.round(ext, 8)
 print(f"Ekstremum w punkcie: {ext_rounded}, znalezione w {iterations} iteracjach.")
 
 # Wizualizacja
-x = np.linspace(-1, 2, 400)
-y = np.linspace(-1, 2, 400)
+x = np.linspace(0, 2, 400)
+y = np.linspace(0, 2, 400)
 X, Y = np.meshgrid(x, y)
 Z = f(X, Y)
 
