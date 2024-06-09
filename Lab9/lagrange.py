@@ -2,9 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sympy as sp
 
+
 def lagrange_method(f, constraints, variables):
     # Mnożniki Lagrange'a
-    lambdas = sp.symbols(f'lambda1:{len(constraints) + 1}')
+    lambdas = sp.symbols(f"lambda1:{len(constraints) + 1}")
 
     # Funkcja Lagrange'a
     L = f + sum(lambdas[i] * constraints[i] for i in range(len(constraints)))
@@ -17,15 +18,17 @@ def lagrange_method(f, constraints, variables):
 
     return result
 
+
 def print_solution(solution):
     for sol in solution:
         for var, val in sol.items():
             print(f"{var} = {val.evalf(n=1)}")
         print()
 
+
 # Przykład 1
-x1, x2 = sp.symbols('x1 x2')
-f1 = x1 ** 2 + x2 ** 2
+x1, x2 = sp.symbols("x1 x2")
+f1 = x1**2 + x2**2
 constraint1 = [2 * x1 + x2 - 2]
 variables1 = [x1, x2]
 
@@ -46,17 +49,19 @@ constraint_f = lambda x1, x2: 2 * x1 + x2 - 2
 
 plt.figure(figsize=(6, 6))
 plt.contour(X, Y, Z, levels=10)
-plt.contour(X, Y, constraint_f(X, Y), levels=[0], colors='red')
-plt.scatter([ext[x1]], [ext[x2]], color='red')
+plt.contour(X, Y, constraint_f(X, Y), levels=[0], colors="red")
+plt.scatter([ext[x1]], [ext[x2]], color="red", label="Ekstremum")
 
-plt.title('Metoda Mnożników Lagrange\'a')
-plt.xlabel('$x_1$')
-plt.ylabel('$x_2$')
+plt.title("Metoda Mnożników Lagrange'a")
+plt.xlabel("$x_1$")
+plt.ylabel("$x_2$")
+plt.legend()
 plt.grid(True)
+plt.savefig("lagrange_1.jpg")
 plt.show()
 
-#Przykład 2
-x, y, h = sp.symbols('x y h')
+# Przykład 2
+x, y, h = sp.symbols("x y h")
 f2 = x * y * h
 constraint2 = [6 - x - y - h]
 variables2 = [x, y, h]
